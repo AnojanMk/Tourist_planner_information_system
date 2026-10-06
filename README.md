@@ -1,6 +1,6 @@
 # Local Tourist Day-Visit Planner and Information System — Mutur
 
-ITE2953 Programming Group Project (25S1) — individual project by [your name].
+ITE2953 Programming Group Project (25S2) — individual project by Anojan Mk.
 A tourism information and one-day visit-planning web app for **Mutur, Sri Lanka**
 and places of interest within a 25km radius.
 
