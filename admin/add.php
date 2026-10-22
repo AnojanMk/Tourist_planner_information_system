@@ -26,10 +26,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $error = 'Database connection is unavailable.';
     } else {
         $stmt = $conn->prepare("INSERT INTO places (name, category, description, latitude, longitude, distance_km, travel_time, opening_time, closing_time, travel_tips, image_url) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-        $stmt->bind_param("sssddsdssss", $name, $category, $description, $latitude, $longitude, $distance_km, $travel_time, $opening_time, $closing_time, $travel_tips, $image_url);
-        $stmt->execute();
-        header('Location: dashboard.php?msg=Place+added+successfully');
-        exit;
+        $stmt->bind_param("sssddsdsssss", $name, $category, $description, $latitude, $longitude, $distance_km, $travel_time, $opening_time, $closing_time, $travel_tips, $image_url);
+        if ($stmt->execute()) {
+    header('Location: dashboard.php?msg=' . urlencode('Place added successfully'));
+    exit;
+}
     }
 }
 
