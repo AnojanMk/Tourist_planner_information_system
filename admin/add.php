@@ -30,6 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->execute()) {
     header('Location: dashboard.php?msg=' . urlencode('Place added successfully'));
     exit;
+}else {
+    $error = 'Could not save the place: ' . $stmt->error;
 }
     }
 }
