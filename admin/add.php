@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Name, latitude and longitude are required.';
     } else {
         $stmt = $conn->prepare("INSERT INTO places (name, category, description, latitude, longitude, distance_km, travel_time, opening_time, closing_time, travel_tips, image_url) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-        $stmt->bind_param('sssddsssss', $name, $category, $description, $latitude, $longitude, $distance_km, $travel_time, $opening_time, $closing_time, $travel_tips, $image_url);
+        $stmt->bind_param('sss', $name, $category, $description, $latitude, $longitude, $distance_km, $travel_time, $opening_time, $closing_time, $travel_tips, $image_url);
         $stmt->execute();
         header('Location: dashboard.php?msg=Place+added+successfully');
         exit;
