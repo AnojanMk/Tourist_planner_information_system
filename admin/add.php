@@ -1,6 +1,7 @@
 <?php
 require_once '../config/db.php';
 require_once 'auth_check.php';
+$conn = $GLOBALS['conn'] ?? null;
 $pageTitle = 'Add Place';
 $basePath = '../';
 
@@ -21,9 +22,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($name === '' || $latitude === '' || $longitude === '') {
         $error = 'Name, latitude and longitude are required.';
+    } elseif (!($conn instanceof mysqli)) {
+      $error = 'Database connection is unavailable.';
     } else {
         $stmt = $conn->prepare("INSERT INTO places (name, category, description, latitude, longitude, distance_km, travel_time, opening_time, closing_time, travel_tips, image_url) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-        $stmt->bind_param("sssddsdssss", $name, $category, $description, $latitude, $longitude, $distance_km, $travel_time, $opening_time, $closing_time, $travel_tips, $image_url);
+        $stmt->bind_param("sssddsdsssss", $name, $category, $description, $latitude, $longitude, $distance_km, $travel_time, $opening_time, $closing_time, $travel_tips, $image_url);
         $stmt->execute();
         header('Location: dashboard.php?msg=Place+added+successfully');
         exit;
