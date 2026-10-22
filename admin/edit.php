@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Name, latitude and longitude are required.';
     } else {
         $stmt = $conn->prepare("UPDATE places SET name=?, category=?, description=?, latitude=?, longitude=?, distance_km=?, travel_time=?, opening_time=?, closing_time=?, travel_tips=?, image_url=? WHERE id=?");
-        $stmt->bind_param('sssdddsssss', $name, $category, $description, $latitude, $longitude, $distance_km, $travel_time, $opening_time, $closing_time, $travel_tips, $image_url, $id);
+        $stmt->bind_param('sssdddsssssi', $name, $category, $description, $latitude, $longitude, $distance_km, $travel_time, $opening_time, $closing_time, $travel_tips, $image_url, $id);
         $stmt->execute();
         header('Location: dashboard.php?msg=Place+updated+successfully');
         exit;
