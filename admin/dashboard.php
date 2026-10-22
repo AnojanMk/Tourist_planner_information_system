@@ -4,6 +4,7 @@ require_once 'auth_check.php';
 $pageTitle = 'Admin Dashboard';
 $basePath = '../';
 
+global $conn;
 $result = $conn->query("SELECT * FROM places ORDER BY id ASC");
 
 include '../includes/header.php';
@@ -29,9 +30,12 @@ include '../includes/header.php';
         <a href="add.php" class="btn btn-brand"><i class="bi bi-plus-lg me-1"></i>Add new place</a>
       </div>
 
-      <?php if (isset($_GET['msg'])): ?>
-        <div class="alert alert-success"><i class="bi bi-check-circle me-1"></i><?php echo htmlspecialchars($_GET['msg']); ?></div>
-      <?php endif; ?>
+<?php if (!empty($_GET['msg'])): ?>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <i class="bi bi-check-circle me-1"></i><?php echo htmlspecialchars($_GET['msg']); ?>
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+<?php endif; ?>
 
       <div class="table-responsive admin-card p-2">
         <table class="table table-admin align-middle mb-0">
